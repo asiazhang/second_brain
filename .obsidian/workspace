@@ -1,0 +1,110 @@
+{
+  "main": {
+    "id": "299125ef91dcb9b9",
+    "type": "split",
+    "children": [
+      {
+        "id": "4ca5f9d1d7d3cf12",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "17a05bd143d97400",
+    "type": "split",
+    "children": [
+      {
+        "id": "f24dc663176cfba6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "640f16b366ad51d8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "89f89730c3027107",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b6c4fbb34b6f60d3",
+    "type": "split",
+    "children": [
+      {
+        "id": "7f2f00713166a400",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aebfd83b30bacf5f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "7217faa738c23a89",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
+    "从第一天开始就使用脚本构建.md",
+    "软件实践/软件项目成功之道/软件成功之道简介.md",
+    "如果需要就将其签入.md",
+    "软件实践/软件项目成功之道/留在沙箱里.md",
+    "软件实践/软件项目成功之道/# 软件项目成功之道.md",
+    "留在沙箱里.md",
+    "软件实践/软件项目成功之道/Untitled.md",
+    "事件回顾/BuildEngine部署导致构建中心API不可用问题分析及改进措施.md",
+    "事件回顾/Untitled.md"
+  ]
+}
