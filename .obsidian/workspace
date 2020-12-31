@@ -10,7 +10,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
+            "file": "编程指南/容器/docker/ENTRY POINT.md",
             "mode": "source"
           }
         }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
+                "file": "编程指南/容器/docker/ENTRY POINT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -84,7 +84,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md"
+                "file": "编程指南/容器/docker/ENTRY POINT.md"
               }
             }
           }
@@ -96,6 +96,7 @@
     "collapsed": true
   },
   "lastOpenFiles": [
+    "编程指南/容器/docker/ENTRY POINT.md",
     "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
     "软件实践/软件项目成功之道/持续构建.md",
     "README.md",
@@ -104,7 +105,6 @@
     "软件实践/软件项目成功之道/持续测试.md",
     "持续测试.md",
     "持续构建.md",
-    "事件回顾/BuildEngine部署导致构建中心API不可用问题分析及改进措施.md",
-    "从第一天开始就使用脚本构建.md"
+    "事件回顾/BuildEngine部署导致构建中心API不可用问题分析及改进措施.md"
   ]
 }

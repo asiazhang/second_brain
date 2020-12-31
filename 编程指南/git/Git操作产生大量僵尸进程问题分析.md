@@ -82,7 +82,7 @@ https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
 ### 解决方案
 使用tini来作为PID 1进程。
 
-1. 修改基础镜像，将tini作为[[ENTRY POINT]]
+1. 修改基础镜像，将[tini](https://github.com/krallin/tini)作为[[ENTRY POINT]]
 
 	```docker
 	RUN apk add --no-cache tini
