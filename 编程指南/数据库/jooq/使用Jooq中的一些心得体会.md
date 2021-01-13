@@ -30,7 +30,11 @@ fun saveCommitParseResult() {
 **注意**：请不要创建特别大的事务，防止对数据库产生影响。
 
 ```kotlin
-
+dslContext.transaction { configuration ->  
+ DSL.using(configuration)  
+        .batchInsert(...)  
+        .execute()  
+}
 ```
 
 ## 批量写入
