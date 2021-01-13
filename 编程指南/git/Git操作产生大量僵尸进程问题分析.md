@@ -41,7 +41,7 @@ fun testClone() {
 
 ## 尝试替换Zt-exec库	
 
-使用Java只带的ProcessBuilder库来启动进程，看下是否还有问题：
+使用Java自带的ProcessBuilder库来启动进程，看下是否还有问题：
 
 ```kotlin
 fun testClone1() {  
@@ -73,7 +73,7 @@ PID    PPID     USER      STAT       COMMAND
 1       0       root      S           java -XX:+UseG1GC ....
 ```
 
-但是我们的Java程序没有正确处理进程发送的 `SIGCHLD` Singal信号，导致Git操作剩余的SSH进程一致存在。
+但是我们的Java程序没有正确处理进程发送的 `SIGCHLD` Singal信号，导致Git操作剩余的SSH进程一直存在。
 
 网络上有一篇文章说明非常详细：
 
@@ -100,4 +100,4 @@ https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
 	1       0       root     S         /sbin/init -- java -XX:+UseG1GC ....
 	```
 	
-	这样僵尸进程🧟‍♂️就被正常处理了。
+这样僵尸进程🧟‍♂️就被正常处理了。

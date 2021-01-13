@@ -97,14 +97,14 @@
   },
   "lastOpenFiles": [
     "工作总结/日报月报输出/2021-01/2021-01-12.md",
+    "编程指南/git/Git操作产生大量僵尸进程问题分析.md",
+    "编程指南/容器/docker/ENTRY POINT.md",
+    "编程指南/linux/linux进程状态.md",
+    "README.md",
     "工作总结/日报月报输出/2021-01/coding_branch_create.png",
     "2021-01-12.md",
     "软件实践/CICD/Untitled.md",
-    "编程指南/git/Git操作产生大量僵尸进程问题分析.md",
-    "README.md",
-    "编程指南/容器/docker/ENTRY POINT.md",
     "软件实践/软件项目成功之道/从第一天开始就使用脚本构建.md",
-    "软件实践/软件项目成功之道/持续构建.md",
-    "任何机器都可以作为构建机.md"
+    "软件实践/软件项目成功之道/持续构建.md"
   ]
 }
