@@ -6,35 +6,38 @@ Coding SaaS版本之前采用[[jenkins]]作为CI构建引擎，后续想把OA版
 ## 当前问题
 
 1. CodingCI当前只支持OA版本基座，跟SaaS版本的基座接口有差异
-2. CodingCI鉴权采用的是内部方式，而SaaS版本用过的OAuth2，有一定差异
-3. CodingCI版本基座的接口，跟SaaS版本基座接口也有差异
+2. CodingCI版本基座的接口，跟SaaS版本基座接口也有差异
 
 ## 解决方案
-基座接口标准化为SDK，确定接口/入参/出参。此SDK作为QCI接入的标准，OA版本和SaaS版本在自己的应用中分别增加对应的实现。QCI按照此标准进行接口调用。
+
+### 前期
+
+根据当前基座的实现标准化proto文件。OA版本无需增加Adapter（因为代码都是转发，无太大意义）。SaaS版本增加QCIAdapter，并依赖于proto标准化的SDK。此SDK作为QCI接入的标准，SaaS版本QCIAdapter实现以下功能：
+
+1. 如果SaaS版本已有实现，那么直接转发请求，并将参数/返回值标准化。
+2. 如果SaaS版本没有实现接口，那么QCIAdapter直接实现，后续逐步交由SaaS同学合并到版本中。
 
 见下图：
 
-![[coding_saas_adapter.png]]
+![[coding_saas_adapter_early.png]]
 
-几个需要注意的地方：
+### 中期
 
-1. CodingCI后续不再直接调用基座接口，都通过Adatper间接调用
-2. Coding [[Adapter]]强烈建议仅提供一个调用点，即使内部微服务化
+部分接口已经由SaaS同学实现，Adapter纯转发。
 
-## FAQ
+![[coding_saas_adapter_middle.png]]
 
-### 为什么OA版本CodingCI也要使用SDK调用Adatper？
-1. CodingCI Adapter SDK是未来其他业务要接入CodingCI的基准，其他业务必须实现Adatper中接口，CodingCI才能正常工作。如果OA版本直接调用原基座，跳过SDK和Adapter，有可能导致未来部分修改未体现在SDK中，其他业务部署新版本CodingCI后不兼容。OA版本的CodingCI也使用SDK调用Adatper，是向外证明：**OA版本CodingCI使用当前的SDK能正常工作，其他业务不用担心兼容性问题。**
-2. 有利于CodingCI升级的规范化。CodingCI升级后，如有对基座接口的新要求，必须要在SDK中体现。这样其他业务的同学查看SDK的要求和升级文档，就知道如何来适配新版本CodingCI。此要求甚至可以强制体现在SDK的版本中。比如CodingCI 1.2.7要求SDK版本>=1.0.5，如果业务接入的SDK版本不够高，这直接提示版本太低无法运行。
+### 后期
 
-### 基座微服务化后，不能对外提供多个调用点么？
-1. 微服务化仅是内部实现，不建议对外体现。外部用户仅需要知道有一个调用点，能通过SDK交互就行。
-2. 方便第三方业务接入，使用更简单。
+OA版本和SaaS版本的接口都已经根据proto标准化，去掉Adapter。
 
-### Adapter为什么实现为单独微服务，基座直接实现不行么？
-1. CodingCI依赖基座的接口只是基座的其中一部分，是整个基座API的子集。如果直接让OA版本直接实现，会导致基座服务接口定义碎片化，不利于后期维护。
-2. 通过部署为单独的微服务，可以对外屏蔽底层实现，调用者无需关心内部是否采用微服务化。
+![[coding_saas_adapter_after.png]]
 
+## 如何保证接口升级稳定性
+
+由于当前是通过适配器模式进行转发，那么一个无可避免的问题就是OA或者SaaS版本的接口变化可能会导致Adapter失效，需要某种自动化的验证方式来保证依赖稳定性。我们考虑使用契约验证的方式，在部署流水线上增加阶段来验证。
+
+![[coding_saas_qci_test.png]]
 
 ## 接口差异和标准化
 
@@ -42,6 +45,7 @@ Coding SaaS版本之前采用[[jenkins]]作为CI构建引擎，后续想把OA版
 
 - 无差异接口：8个
 - 参数差异接口：7个
-- SaaS版本缺失接口：25个
+- SaaS版本缺失接口：21个
+- 暂时无需提供接口：4个
 
-SaaS版本接口缺失有点多。
+SaaS版本接口缺失有点多，需要进行接口补全。
