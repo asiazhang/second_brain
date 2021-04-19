@@ -24,13 +24,11 @@ QCI接入SaaS在基座部分总体分为以下几个阶段：
 ### 2.2 接口差异场景
 
  哪些接口已有，但是跟OA版本这边存在差异（传入参数/传出参数）
-1. **返回中缺少某些属性**（80%场景，重点关注是否需要）
+1. 返回中缺少某些属性（80%场景，**重点关注缺少的属性CI是否需要，逐个接口找CI的同学确认**）
 2. 调用端缺少某些字段
 3. 属性名称差异
 4. 属性格式差异（比如时间戳格式）
 5. 接口名称差异
-
-> 接口差异大部分都是返回值中缺少属性，这个建议跟Saas的同学确认清楚，拿到最新的proto文件比较
 
 这里唯一需要SaaS同学处理的场景为属性缺失，适配层无法解决，通过saas已有接口也搞不定，必须saas的gRPC接口修改。
 
@@ -56,7 +54,7 @@ oa版本和saas版本的`Credential.proto`文件接口`CredentialService.getById
 
 ## 3. 制订适配计划
 
-根据差异结果，分析工作量，并制订适配计划
+根据差异结果，分析工作量，并制订适配计划。
 
 ### 3.1 模块关联到SaaS负责人
 
@@ -68,17 +66,38 @@ oa版本和saas版本的`Credential.proto`文件接口`CredentialService.getById
 
 ## 4. 基于SaaS的nocalhost环境进行测试
 
-SaaS采用nocalhost环境作为开发环境，因此务必联系saas同学开通nocalhost
+1. 使用Java或者Kotlin开发适配器服务
+2. 适配器可能根据实际情况来做一些DirtyWork（比如转发SaaS 仓库Webhook数据）
+3. SaaS采用nocalhost环境作为开发环境，因此务必联系saas同学开通nocalhost
 
 ### 4.1 联系张阳开通nocalhost权限
 
+获取登陆nocal环境的相关信息：
+
+1. 登陆网站
+2. 用户名                            
+3. 密码
+
 ### 4.2 熟悉nocalhost使用
 
+查看帮助网站：https://nocalhost.dev/zh/getting-started/
+
 ### 4.3 使用端口转发进行本地测试
+
+如果需要连接nocalhost环境中的服务进行测试，那么需要进行端口转发。
+
+1. 在VsCode插件中登陆Nocalhost
+2. 点击`Workloads`/`Deployments`/某个服务
+3. 选择`Port Forward`
+4. 输入端口号`本机端口号:Nocalhost环境端口号`
+5. 成功后开始联调
 
 ## 5. 联调阶段
 
 ### 5.1 镜像push
+
+1. 在Coding上配置流水线，构建镜像并push到coding的镜像仓库
+2. push的仓库地址，用户名和密码可以联系张阳
 
 ### 5.2 确定联调基础设施信息
 
@@ -90,10 +109,21 @@ SaaS采用nocalhost环境作为开发环境，因此务必联系saas同学开通
 
 ### 5.3 编写对应的k8s部署文件
 
-1. 编写apiRoute，设置反向代理转发规则
-2. 配置对应环境变量
-3. 配置存活探针和有效性探针
-4. 配置对应Service
+1. 编写`apiRoute`，设置反向代理转发规则（可能需要前端调整，防止跟Saas冲突），举例：
+	```
+	   [
+        {
+          "path": "/qci/api/user/**",
+          "rewritePaths": {
+            "/qci/(?<segment>.*)": "/${segment}"
+          },
+          "routeUri": "http://e-qci-ci-saas-adapter.e-qci:8080"
+        }
+      ]
+	```
+1. 配置对应环境变量
+2. 配置存活探针和有效性探针
+3. 配置对应Service
 
 ### 5.3 staging环境更新
 
